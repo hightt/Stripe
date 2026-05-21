@@ -13,12 +13,14 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
+    libcurl4-openssl-dev \
     procps \
     curl \
     nano \
     default-mysql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl pdo pdo_mysql zip opcache mbstring xml gd
+    && docker-php-ext-install intl pdo pdo_mysql zip opcache mbstring xml gd curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
