@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dziękujemy za zamówienie!{% endblock %}
+
+{% block body %}
+<div style="max-width: 600px; margin: 50px auto; padding: 30px; text-align: center; font-family: sans-serif; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+    
+    <div style="color: #38a169; font-size: 48px; margin-bottom: 20px;">✓</div>
+    
+    <h1 style="color: #2d3748; margin-bottom: 10px;">Płatność zainicjowana!</h1>
+    <p style="color: #718096; line-height: 1.6;">
+        Dziękujemy za zakupy. Twoje zamówienie <strong>#{{ order.id }}</strong> jest obecnie przetwarzane przez nasz system.
+    </p>
+
+    <div style="background-color: #f7fafc; padding: 15px; border-radius: 6px; margin: 25px 0; text-align: left;">
+        <h3 style="margin-top: 0; color: #4a5568; font-size: 16px;">Podsumowanie:</h3>
+        <p style="margin: 5px 0; color: #4a5568;"><strong>Kwota:</strong> {{ order.amount|number_format(2, ',', ' ') }} PLN</p>
+        {% if client %}
+            <p style="margin: 5px 0; color: #4a5568;"><strong>Email klienta:</strong> {{ client.email }}</p>
+        {% endif %}
+    </div>
+
+    <p style="font-size: 14px; color: #a0aec0; margin-bottom: 30px;">
+        Gdy tylko Stripe potwierdzi zaksięgowanie wpłaty, otrzymasz wiadomość e-mail z potwierdzeniem.
+    </p>
+
+    <a href="/" style="display: inline-block; background-color: #3182ce; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        Powrót do sklepu
+    </a>
+</div>
+{% endblock %}

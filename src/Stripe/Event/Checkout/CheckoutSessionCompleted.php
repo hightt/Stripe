@@ -18,5 +18,6 @@ class CheckoutSessionCompleted implements StripeWebhookInterface
 
     public function handle(Event $event): void
     {
+        $test = $event;
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Stripe\Exception;
+namespace App\Exception\Stripe;
 
 final class WebhookHandlerNotFoundException extends \RuntimeException
 {
