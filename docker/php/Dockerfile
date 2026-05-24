@@ -44,3 +44,5 @@ WORKDIR /var/www/stripe
 
 # Ustawienie uprawnień (ważne dla cache i logów Symfony)
 RUN chown -R www-data:www-data /var/www/stripe
+
+RUN git config --global --add safe.directory /var/www/stripe
