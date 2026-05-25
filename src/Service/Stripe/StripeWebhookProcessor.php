@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Stripe;
 
 use App\Stripe\Event\StripeWebhookInterface;
-use App\Stripe\Exception\WebhookHandlerNotFoundException;
+use App\Exception\Stripe\WebhookHandlerNotFoundException;
 use App\Stripe\StripeConfigurationService;
 use Stripe\Event;
 use Stripe\Webhook;

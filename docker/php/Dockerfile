@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install intl pdo pdo_mysql zip opcache mbstring xml gd curl \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install pdo_mysql
 
 #Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -44,3 +45,5 @@ WORKDIR /var/www/stripe
 
 # Ustawienie uprawnień (ważne dla cache i logów Symfony)
 RUN chown -R www-data:www-data /var/www/stripe
+
+RUN git config --global --add safe.directory /var/www/stripe
