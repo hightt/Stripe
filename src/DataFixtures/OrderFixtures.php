@@ -6,17 +6,19 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Order;
+use App\Enum\PaymentStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Uid\Uuid;
 
 final class OrderFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-        $statuses = ['new', 'paid', 'failed'];
+        $statuses = [PaymentStatus::NEW, PaymentStatus::PAID, PaymentStatus::REFUNDED];
 
         for ($i = 1; $i <= 100; $i++) {
             $order = new Order();
@@ -30,8 +32,9 @@ final class OrderFixtures extends Fixture implements DependentFixtureInterface
 
             $status = $faker->randomElement($statuses);
             $order->setStatus($status);
+            $order->setPaymentToken(Uuid::v4()->toRfc4122());
 
-            if ($status !== 'new') {
+            if ($status !== PaymentStatus::NEW) {
                 $order->setStripeSessionId('cs_test_' . $faker->numberBetween(1, 99999));
             }
 

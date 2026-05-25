@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Api\V1\Stripe;
 
 use App\Service\Stripe\StripeWebhookProcessor;
-use App\Stripe\Exception\WebhookHandlerNotFoundException;
+use App\Exception\Stripe\WebhookHandlerNotFoundException;
 use Psr\Log\LoggerInterface;
 use Stripe\Exception\SignatureVerificationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

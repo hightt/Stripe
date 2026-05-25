@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace App\Service\Stripe;
 
+use App\Entity\Order;
 use App\Repository\OrderRepository;
 use App\Stripe\StripeConfigurationService;
 use Stripe\StripeClient;
@@ -16,11 +17,10 @@ class StripeCheckoutService
         private OrderRepository $orderRepository,
     ) {}
 
-    public function createCheckoutSession(int $orderId): string
+    public function createCheckoutSession(Order $order): string
     {
-        $successUrl    = $this->stripePaymentService->createPaymentStatusUrl('success', $orderId);
-        $cancelUrl     = $this->stripePaymentService->createPaymentStatusUrl('failure', $orderId);
-        $order         = $this->orderRepository->find($orderId);
+        $successUrl    = $this->stripePaymentService->createPaymentStatusUrl('success', $order->getId());
+        $cancelUrl     = $this->stripePaymentService->createPaymentStatusUrl('failure', $order->getId());
         $amountInCents = (int) round($order->getAmount() * 100);
         $stripe        = new StripeClient($this->stripeConfiguration->secretKey);
         $session       = $stripe->checkout->sessions->create([
@@ -35,12 +35,12 @@ class StripeCheckoutService
                             'name' => sprintf('Zamówienie #%d', $order->getId()),
                         ],
                     ],
-                    'quantity' => 1
+                    'quantity'   => 1,
                 ],
             ],
             'mode'        => 'payment',
             'metadata'    => [
-                'order_id' => $orderId,
+                'order_id' => $order->getId(),
             ],
         ]);
 
