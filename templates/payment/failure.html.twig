@@ -19,7 +19,7 @@
     </div>
 
     <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center;">
-        <a href="{{ path('app_order_payment', {'id': order.id}) }}" style="display: inline-block; background-color: #dd6b20; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        <a href="{{ path('app_order_pay', {'orderId': order.id}) }}" style="display: inline-block; background-color: #dd6b20; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
             Spróbuj ponownie
         </a>
         <a href="/" style="display: inline-block; background-color: #edf2f7; color: #4a5568; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
