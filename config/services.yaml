@@ -32,3 +32,9 @@ services:
     App\Service\Stripe\StripeWebhookProcessor:
         arguments:
             $handlers: !tagged_iterator app.stripe_event_handler
+
+    Stripe\StripeClient:
+        arguments:
+            $config: '%env(STRIPE_SECRET_KEY)%'
+
+    App\Stripe\PaymentGatewayInterface: '@App\Service\Stripe\StripePaymentGatewayService'
