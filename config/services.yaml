@@ -36,3 +36,5 @@ services:
     Stripe\StripeClient:
         arguments:
             $config: '%env(STRIPE_SECRET_KEY)%'
+
+    App\Stripe\PaymentGatewayInterface: '@App\Service\Stripe\StripePaymentGatewayService'
